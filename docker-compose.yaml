@@ -1,0 +1,21 @@
+services:
+  api:
+    build:
+      context: ./api
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - 3000:3000 
+  db:
+    image: mysql/mysql-server:latest
+    container_name: my-mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=shopper_db
+      - MYSQL_ROOT_PASSWORD=mysqlPW
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-volume:/var/lib/mysql
+volumes:
+  mysql-volume:
